@@ -90,7 +90,17 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         // Create the notification
         final Notification notification = buildNotification(this, bgOptions);
 
-        startForeground(SERVICE_NOTIFICATION_ID, notification);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            try {
+                startForeground(SERVICE_NOTIFICATION_ID, notification);
+            } catch (android.app.ForegroundServiceStartNotAllowedException e) {
+                // Android 12+: not allowed to start foreground service from background
+                stopSelf();
+                return START_NOT_STICKY;
+            }
+        } else {
+            startForeground(SERVICE_NOTIFICATION_ID, notification);
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
