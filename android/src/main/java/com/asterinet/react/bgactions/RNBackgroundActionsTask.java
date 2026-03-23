@@ -108,6 +108,18 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @Override
+    public void onTimeout(int startId) {
+        super.onTimeout(startId);
+        stopSelf();
+    }
+
+    @Override
+    public void onTimeout(int startId, int fgsType) {
+        super.onTimeout(startId, fgsType);
+        stopSelf();
+    }
+
     private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final int importance = NotificationManager.IMPORTANCE_LOW;
