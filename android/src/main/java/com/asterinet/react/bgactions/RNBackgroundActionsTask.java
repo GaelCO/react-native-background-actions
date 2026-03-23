@@ -81,6 +81,10 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent == null) {
+            stopSelf();
+            return START_NOT_STICKY;
+        }
         final Bundle extras = intent.getExtras();
         if (extras == null) {
             throw new IllegalArgumentException("Extras cannot be null");
