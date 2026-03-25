@@ -15,7 +15,6 @@ export type BackgroundTaskOptions = {
         value: number;
         indeterminate?: boolean | undefined;
     } | undefined;
-    foregroundServiceType?: 'dataSync' | 'mediaPlayback' | 'phoneCall' | 'location' | 'connectedDevice' | 'mediaProjection' | 'camera' | 'microphone' | 'health' | 'remoteMessaging' | 'systemExempted' | 'shortService' | 'specialUse' | undefined;
 };
 declare const backgroundServer: BackgroundServer;
 /**
@@ -26,7 +25,6 @@ declare const backgroundServer: BackgroundServer;
  *            color?: string
  *            linkingURI?: string,
  *            progressBar?: {max: number, value: number, indeterminate?: boolean},
- *            foregroundServiceType?: 'dataSync'|'mediaPlayback'|'phoneCall'|'location'|'connectedDevice'|'mediaProjection'|'camera'|'microphone'|'health'|'remoteMessaging'|'systemExempted'|'shortService'|'specialUse'
  *            }} BackgroundTaskOptions
  * @extends EventEmitter<'expiration',any>
  */
@@ -104,7 +102,6 @@ declare class BackgroundServer extends EventEmitter<"expiration", any> {
             value: number;
             indeterminate?: boolean | undefined;
         } | undefined;
-        foregroundServiceType?: 'dataSync' | 'mediaPlayback' | 'phoneCall' | 'location' | 'connectedDevice' | 'mediaProjection' | 'camera' | 'microphone' | 'health' | 'remoteMessaging' | 'systemExempted' | 'shortService' | 'specialUse' | undefined;
     } & {
         parameters?: T | undefined;
     }): Promise<void>;
