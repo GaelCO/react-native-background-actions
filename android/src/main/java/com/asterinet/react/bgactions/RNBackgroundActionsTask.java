@@ -14,6 +14,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.ServiceCompat;
 
 import com.facebook.react.HeadlessJsTaskService;
 import com.facebook.react.bridge.Arguments;
@@ -94,16 +95,21 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         // Create the notification
         final Notification notification = buildNotification(this, bgOptions);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            try {
-                startForeground(SERVICE_NOTIFICATION_ID, notification);
-            } catch (android.app.ForegroundServiceStartNotAllowedException e) {
+        try {
+            ServiceCompat.startForeground(
+                this,
+                SERVICE_NOTIFICATION_ID,
+                notification,
+                bgOptions.getForegroundServiceType(),
+            );
+        } catch (Exception e) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                    && e instanceof android.app.ForegroundServiceStartNotAllowedException) {
                 // Android 12+: not allowed to start foreground service from background
                 stopSelf();
                 return START_NOT_STICKY;
             }
-        } else {
-            startForeground(SERVICE_NOTIFICATION_ID, notification);
+            throw e;
         }
         return super.onStartCommand(intent, flags, startId);
     }

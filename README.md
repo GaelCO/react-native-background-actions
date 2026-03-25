@@ -95,14 +95,15 @@ await BackgroundService.stop();
 ### Options
 | Property      | Type                                                  | Description                                                                                                                                                                    |
 | ------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `taskName`    | `<string>`                                            | Task name for identification.                                                                                                                                                  |
-| `taskTitle`   | `<string>`                                            | **Android Required**. Notification title.                                                                                                                                      |
-| `taskDesc`    | `<string>`                                            | **Android Required**. Notification description.                                                                                                                                |
-| `taskIcon`    | [`<taskIconOptions>`](#taskIconOptions)               | **Android Required**. Notification icon.                                                                                                                                       |
-| `color`       | `<string>`                                            | Notification color. **Default**: `"#ffffff"`.                                                                                                                                  |
-| `linkingURI`  | `<string>`                                            | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
-| `progressBar` | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar.                                                                                                                                                     |
-| `parameters`  | `<any>`                                               | Parameters to pass to the task.                                                                                                                                                |
+| `taskName`             | `<string>`                                            | Task name for identification.                                                                                                                                                  |
+| `taskTitle`            | `<string>`                                            | **Android Required**. Notification title.                                                                                                                                      |
+| `taskDesc`             | `<string>`                                            | **Android Required**. Notification description.                                                                                                                                |
+| `taskIcon`             | [`<taskIconOptions>`](#taskIconOptions)               | **Android Required**. Notification icon.                                                                                                                                       |
+| `color`                | `<string>`                                            | Notification color. **Default**: `"#ffffff"`.                                                                                                                                  |
+| `linkingURI`           | `<string>`                                            | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
+| `progressBar`          | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar.                                                                                                                                                     |
+| `foregroundServiceType`| [`<foregroundServiceType>`](#foregroundservicetype)   | **Android only**. Foreground service type. Must match `android:foregroundServiceType` in `AndroidManifest.xml`. **Default**: `"dataSync"`.                                    |
+| `parameters`           | `<any>`                                               | Parameters to pass to the task.                                                                                                                                                |
 
 #### taskIconOptions
 **Android only**
@@ -127,6 +128,29 @@ Example:
 Example:
 
 ![ProgressBar](https://developer.android.com/images/ui/notifications/notification-progressbar_2x.png)
+
+#### foregroundServiceType
+**Android only** (API 29+ / Android 10+)
+
+Specifies the foreground service type. The value must match the `android:foregroundServiceType` declared in your `AndroidManifest.xml`. See [INSTALL.md](./INSTALL.md) for the required manifest and permission setup.
+
+| Value | Android API | `<uses-permission>` required |
+| --- |-------------| --- |
+| `"dataSync"` *(default)* | 29 (Q)      | `FOREGROUND_SERVICE_DATA_SYNC` |
+| `"mediaPlayback"` | 29 (Q)      | `FOREGROUND_SERVICE_MEDIA_PLAYBACK` |
+| `"phoneCall"` | 29 (Q)      | `FOREGROUND_SERVICE_PHONE_CALL` |
+| `"location"` | 29 (Q)      | `FOREGROUND_SERVICE_LOCATION` |
+| `"connectedDevice"` | 29 (Q)      | `FOREGROUND_SERVICE_CONNECTED_DEVICE` |
+| `"mediaProjection"` | 29 (Q)      | `FOREGROUND_SERVICE_MEDIA_PROJECTION` |
+| `"camera"` | 30 (R)      | `FOREGROUND_SERVICE_CAMERA` |
+| `"microphone"` | 30 (R)      | `FOREGROUND_SERVICE_MICROPHONE` |
+| `"health"` | 34 (U)      | `FOREGROUND_SERVICE_HEALTH` |
+| `"remoteMessaging"` | 34 (U)      | `FOREGROUND_SERVICE_REMOTE_MESSAGING` |
+| `"systemExempted"` | 34 (U)      | `FOREGROUND_SERVICE_SYSTEM_EXEMPTED` |
+| `"shortService"` | 34 (U)      | `FOREGROUND_SERVICE_SHORT_SERVICE` |
+| `"specialUse"` | 34 (U)      | `FOREGROUND_SERVICE_SPECIAL_USE` |
+
+On Android versions below API 29 this option is ignored. If the requested value is not supported by the running Android version, `"dataSync"` is used as fallback.
 
 ### Deep Linking
 **Android only**

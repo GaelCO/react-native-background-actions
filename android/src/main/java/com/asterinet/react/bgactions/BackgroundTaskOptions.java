@@ -1,6 +1,8 @@
 package com.asterinet.react.bgactions;
 
+import android.content.pm.ServiceInfo;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
@@ -100,5 +102,61 @@ public final class BackgroundTaskOptions {
     @Nullable
     public Bundle getProgressBar() {
         return extras.getBundle("progressBar");
+    }
+
+    public int getForegroundServiceType() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            return 0;
+        }
+        final String type = extras.getString("foregroundServiceType", "dataSync");
+        switch (type) {
+            case "mediaPlayback":
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
+            case "phoneCall":
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_PHONE_CALL;
+            case "location":
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
+            case "connectedDevice":
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE;
+            case "mediaProjection":
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION;
+            case "camera":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            case "microphone":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            case "health":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            case "remoteMessaging":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            case "systemExempted":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            case "shortService":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_SHORT_SERVICE;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            case "specialUse":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    return ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
+                }
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            default: // "dataSync"
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+        }
     }
 }
