@@ -100,7 +100,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 this,
                 SERVICE_NOTIFICATION_ID,
                 notification,
-                bgOptions.getForegroundServiceType(),
+                bgOptions.getForegroundServiceType()
             );
         } catch (Exception e) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
