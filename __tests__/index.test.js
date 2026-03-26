@@ -131,6 +131,7 @@ test('updateNotification-android-notRunning', async () => {
 });
 
 test('foregroundServiceType-single', async () => {
+    expect.hasAssertions();
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
         // @ts-ignore
@@ -138,7 +139,9 @@ test('foregroundServiceType-single', async () => {
     );
     Platform.OS = 'android';
     RNBackgroundActionsModule.start.mockClear();
-    const options = { ...defaultOptions, foregroundServiceType: ['location'] };
+    /** @type {Array<'location'>} */
+    const foregroundServiceType = ['location'];
+    const options = { ...defaultOptions, foregroundServiceType };
     await BackgroundActions.start(defaultTask, options);
     const passedOptions = RNBackgroundActionsModule.start.mock.calls[0][0];
     expect(passedOptions.foregroundServiceType).toEqual(['location']);
@@ -147,6 +150,7 @@ test('foregroundServiceType-single', async () => {
 });
 
 test('foregroundServiceType-multiple', async () => {
+    expect.hasAssertions();
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
         // @ts-ignore
@@ -154,7 +158,9 @@ test('foregroundServiceType-multiple', async () => {
     );
     Platform.OS = 'android';
     RNBackgroundActionsModule.start.mockClear();
-    const options = { ...defaultOptions, foregroundServiceType: ['location', 'microphone'] };
+    /** @type {Array<'location' | 'microphone'>} */
+    const foregroundServiceType = ['location', 'microphone'];
+    const options = { ...defaultOptions, foregroundServiceType };
     await BackgroundActions.start(defaultTask, options);
     const passedOptions = RNBackgroundActionsModule.start.mock.calls[0][0];
     expect(passedOptions.foregroundServiceType).toEqual(['location', 'microphone']);
@@ -163,6 +169,7 @@ test('foregroundServiceType-multiple', async () => {
 });
 
 test('foregroundServiceType-undefined', async () => {
+    expect.hasAssertions();
     let promiseFinish = () => {};
     const defaultTask = jest.fn(
         // @ts-ignore
