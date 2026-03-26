@@ -93,17 +93,17 @@ await BackgroundService.stop();
 > If .start() is called on the backgound, it will not have any effect.
 
 ### Options
-| Property      | Type                                                  | Description                                                                                                                                                                    |
-| ------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `taskName`             | `<string>`                                            | Task name for identification.                                                                                                                                                  |
-| `taskTitle`            | `<string>`                                            | **Android Required**. Notification title.                                                                                                                                      |
-| `taskDesc`             | `<string>`                                            | **Android Required**. Notification description.                                                                                                                                |
-| `taskIcon`             | [`<taskIconOptions>`](#taskIconOptions)               | **Android Required**. Notification icon.                                                                                                                                       |
-| `color`                | `<string>`                                            | Notification color. **Default**: `"#ffffff"`.                                                                                                                                  |
-| `linkingURI`           | `<string>`                                            | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
-| `progressBar`          | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar.                                                                                                                                                     |
-| `foregroundServiceType`| [`<foregroundServiceType>`](#foregroundservicetype)   | **Android only**. Foreground service type. Must match `android:foregroundServiceType` in `AndroidManifest.xml`. **Default**: `"dataSync"`.                                    |
-| `parameters`           | `<any>`                                               | Parameters to pass to the task.                                                                                                                                                |
+| Property                | Type                                                  | Description                                                                                                                                                                    |
+|-------------------------| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `taskName`              | `<string>`                                            | Task name for identification.                                                                                                                                                  |
+| `taskTitle`             | `<string>`                                            | **Android Required**. Notification title.                                                                                                                                      |
+| `taskDesc`              | `<string>`                                            | **Android Required**. Notification description.                                                                                                                                |
+| `taskIcon`              | [`<taskIconOptions>`](#taskIconOptions)               | **Android Required**. Notification icon.                                                                                                                                       |
+| `color`                 | `<string>`                                            | Notification color. **Default**: `"#ffffff"`.                                                                                                                                  |
+| `linkingURI`            | `<string>`                                            | Link that will be called when the notification is clicked. Example: `"yourSchemeHere://chat/jane"`. See [Deep Linking](#deep-linking) for more info. **Default**: `undefined`. |
+| `progressBar`           | [`<taskProgressBarOptions>`](#taskProgressBarOptions) | Notification progress bar.                                                                                                                                                     |
+| `foregroundServiceType` | [`<foregroundServiceType>`](#foregroundservicetype)   | **Android only**. Array of foreground service types to combine. Must match `android:foregroundServiceType` in `AndroidManifest.xml`. |
+| `parameters`            | `<any>`                                               | Parameters to pass to the task.                                                                                                                                                |
 
 #### taskIconOptions
 **Android only**
@@ -132,7 +132,7 @@ Example:
 #### foregroundServiceType
 **Android only** (API 29+ / Android 10+)
 
-Specifies the foreground service type. The value must match the `android:foregroundServiceType` declared in your `AndroidManifest.xml`. See [INSTALL.md](./INSTALL.md) for the required manifest and permission setup.
+Specifies the foreground service type(s) as an array of strings. Flags are OR-ed together, so multiple types can be combined. All values must match the `android:foregroundServiceType` declared in your `AndroidManifest.xml`. See [INSTALL.md](./INSTALL.md) for the required manifest and permission setup.
 
 | Value | Android API | `<uses-permission>` required |
 | --- |-------------| --- |
@@ -150,7 +150,13 @@ Specifies the foreground service type. The value must match the `android:foregro
 | `"shortService"` | 34 (U)      | `FOREGROUND_SERVICE_SHORT_SERVICE` |
 | `"specialUse"` | 34 (U)      | `FOREGROUND_SERVICE_SPECIAL_USE` |
 
-On Android versions below API 29 this option is ignored. If the requested value is not supported by the running Android version, `"dataSync"` is used as fallback.
+On Android versions below API 29 this option is ignored. If a requested value is not supported by the running Android version, `"dataSync"` is used as fallback for that type.
+
+Examples:
+```js
+foregroundServiceType: ['location'],
+foregroundServiceType: ['location', 'microphone'],
+```
 
 ### Deep Linking
 **Android only**

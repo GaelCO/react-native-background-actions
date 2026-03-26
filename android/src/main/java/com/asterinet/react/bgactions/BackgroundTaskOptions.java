@@ -14,6 +14,8 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableMap;
 
+import java.util.ArrayList;
+
 public final class BackgroundTaskOptions {
     private final Bundle extras;
 
@@ -108,7 +110,18 @@ public final class BackgroundTaskOptions {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             return 0;
         }
-        final String type = extras.getString("foregroundServiceType", "dataSync");
+        final ArrayList<String> types = extras.getStringArrayList("foregroundServiceType");
+        if (types == null) {
+            return 0;
+        }
+        int result = 0;
+        for (final String type : types) {
+            result |= typeToForegroundServiceFlag(type);
+        }
+        return result;
+    }
+
+    private int typeToForegroundServiceFlag(@NonNull final String type) {
         switch (type) {
             case "mediaPlayback":
                 return ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
