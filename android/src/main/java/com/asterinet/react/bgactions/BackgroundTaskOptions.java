@@ -116,7 +116,10 @@ public final class BackgroundTaskOptions {
         }
         int result = 0;
         for (final String type : types) {
-            result |= typeToForegroundServiceFlag(type);
+            final int flag = typeToForegroundServiceFlag(type);
+            if (flag != 0) {
+                result |= flag;
+            }
         }
         return result;
     }
@@ -137,37 +140,37 @@ public final class BackgroundTaskOptions {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             case "microphone":
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             case "health":
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             case "remoteMessaging":
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             case "systemExempted":
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             case "shortService":
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_SHORT_SERVICE;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             case "specialUse":
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
                 }
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+                return 0;
             default: // "dataSync"
                 return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
         }

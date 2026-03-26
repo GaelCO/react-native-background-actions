@@ -150,7 +150,7 @@ Specifies the foreground service type(s) as an array of strings. Flags are OR-ed
 | `"shortService"` | 34 (U)      | `FOREGROUND_SERVICE_SHORT_SERVICE` |
 | `"specialUse"` | 34 (U)      | `FOREGROUND_SERVICE_SPECIAL_USE` |
 
-On Android versions below API 29 this option is ignored. If a requested value is not supported by the running Android version, `"dataSync"` is used as fallback for that type.
+On Android versions below API 29 this option is ignored. If a requested value is not supported by the running Android version, it is silently ignored.
 
 Examples:
 ```js
