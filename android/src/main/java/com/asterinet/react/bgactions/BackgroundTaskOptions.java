@@ -126,6 +126,8 @@ public final class BackgroundTaskOptions {
 
     private int typeToForegroundServiceFlag(@NonNull final String type) {
         switch (type) {
+            case "dataSync":
+                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
             case "mediaPlayback":
                 return ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
             case "phoneCall":
@@ -171,8 +173,8 @@ public final class BackgroundTaskOptions {
                     return ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
                 }
                 return 0;
-            default: // "dataSync"
-                return ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
+            default:
+                return 0;
         }
     }
 }

@@ -136,19 +136,19 @@ Specifies the foreground service type(s) as an array of strings. Flags are OR-ed
 
 | Value | Android API | `<uses-permission>` required |
 | --- |-------------| --- |
-| `"dataSync"` *(default)* | 29 (Q)      | `FOREGROUND_SERVICE_DATA_SYNC` |
-| `"mediaPlayback"` | 29 (Q)      | `FOREGROUND_SERVICE_MEDIA_PLAYBACK` |
-| `"phoneCall"` | 29 (Q)      | `FOREGROUND_SERVICE_PHONE_CALL` |
-| `"location"` | 29 (Q)      | `FOREGROUND_SERVICE_LOCATION` |
-| `"connectedDevice"` | 29 (Q)      | `FOREGROUND_SERVICE_CONNECTED_DEVICE` |
-| `"mediaProjection"` | 29 (Q)      | `FOREGROUND_SERVICE_MEDIA_PROJECTION` |
-| `"camera"` | 30 (R)      | `FOREGROUND_SERVICE_CAMERA` |
-| `"microphone"` | 30 (R)      | `FOREGROUND_SERVICE_MICROPHONE` |
-| `"health"` | 34 (U)      | `FOREGROUND_SERVICE_HEALTH` |
-| `"remoteMessaging"` | 34 (U)      | `FOREGROUND_SERVICE_REMOTE_MESSAGING` |
-| `"systemExempted"` | 34 (U)      | `FOREGROUND_SERVICE_SYSTEM_EXEMPTED` |
-| `"shortService"` | 34 (U)      | `FOREGROUND_SERVICE_SHORT_SERVICE` |
-| `"specialUse"` | 34 (U)      | `FOREGROUND_SERVICE_SPECIAL_USE` |
+| `"dataSync"` *(default)* | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_DATA_SYNC` |
+| `"mediaPlayback"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK` |
+| `"phoneCall"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_PHONE_CALL` |
+| `"location"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_LOCATION` |
+| `"connectedDevice"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE` |
+| `"mediaProjection"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION` |
+| `"camera"` | 30 (R)      | `android.permission.FOREGROUND_SERVICE_CAMERA` |
+| `"microphone"` | 30 (R)      | `android.permission.FOREGROUND_SERVICE_MICROPHONE` |
+| `"health"` | 34 (U)      | `android.permission.FOREGROUND_SERVICE_HEALTH` |
+| `"remoteMessaging"` | 34 (U)      | `android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING` |
+| `"systemExempted"` | 34 (U)      | `android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED` |
+| `"shortService"` | 34 (U)      | `android.permission.FOREGROUND_SERVICE_SHORT_SERVICE` |
+| `"specialUse"` | 34 (U)      | `android.permission.FOREGROUND_SERVICE_SPECIAL_USE` |
 
 On Android versions below API 29 this option is ignored. If a requested value is not supported by the running Android version, it is silently ignored.
 
