@@ -102,7 +102,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 notification,
                 bgOptions.getForegroundServiceType()
             );
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                     && e instanceof android.app.ForegroundServiceStartNotAllowedException) {
                 // Android 12+: not allowed to start foreground service from background
