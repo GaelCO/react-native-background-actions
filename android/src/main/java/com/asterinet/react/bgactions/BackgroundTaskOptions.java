@@ -116,9 +116,11 @@ public final class BackgroundTaskOptions {
         }
         int result = 0;
         for (final String type : types) {
-            final int flag = typeToForegroundServiceFlag(type);
-            if (flag != 0) {
-                result |= flag;
+            if (type != null && !type.isEmpty()) {
+                final int flag = typeToForegroundServiceFlag(type);
+                if (flag != 0) {
+                    result |= flag;
+                }
             }
         }
         return result;

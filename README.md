@@ -136,7 +136,7 @@ Specifies the foreground service type(s) as an array of strings. Flags are OR-ed
 
 | Value | Android API | `<uses-permission>` required |
 | --- |-------------| --- |
-| `"dataSync"` *(default)* | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_DATA_SYNC` |
+| `"dataSync"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_DATA_SYNC` |
 | `"mediaPlayback"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK` |
 | `"phoneCall"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_PHONE_CALL` |
 | `"location"` | 29 (Q)      | `android.permission.FOREGROUND_SERVICE_LOCATION` |
