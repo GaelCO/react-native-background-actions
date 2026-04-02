@@ -24,7 +24,7 @@ declare const backgroundServer: BackgroundServer;
  *            taskIcon: {name: string, type: string, package?: string},
  *            color?: string
  *            linkingURI?: string,
- *            progressBar?: {max: number, value: number, indeterminate?: boolean},
+ *            progressBar?: {max: number, value: number, indeterminate?: boolean}
  *            }} BackgroundTaskOptions
  * @extends EventEmitter<'expiration',any>
  */
