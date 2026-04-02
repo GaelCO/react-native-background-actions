@@ -117,13 +117,13 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
     @Override
     public void onTimeout(int startId) {
         super.onTimeout(startId);
-        stopSelf();
+        stopSelf(startId);
     }
 
     @Override
     public void onTimeout(int startId, int fgsType) {
         super.onTimeout(startId, fgsType);
-        stopSelf();
+        stopSelf(startId);
     }
 
     private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {

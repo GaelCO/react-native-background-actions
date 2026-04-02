@@ -110,7 +110,13 @@ public final class BackgroundTaskOptions {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             return 0;
         }
-        final ArrayList<String> types = extras.getStringArrayList("foregroundServiceType");
+        final ArrayList<String> types;
+        try {
+            types = extras.getStringArrayList("foregroundServiceType");
+        } catch (ClassCastException e) {
+            // If the stored value is not an ArrayList<String>, treat it as no types.
+            return 0;
+        }
         if (types == null) {
             return 0;
         }
