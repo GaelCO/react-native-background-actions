@@ -42,6 +42,7 @@ let package = Package(
             sources: [
                 "RNBackgroundActions.m",
             ],
+            publicHeadersPath: "include",
             cSettings: [.headerSearchPath(".")],
             linkerSettings: [.linkedFramework("UIKit"), .linkedFramework("Foundation")]
         ),
